@@ -207,9 +207,10 @@ onUnmounted(() => {
 const calendarUrl = computed(() => {
   if (!props.meetup || !eventDate.value) return null
   const title = encodeURIComponent(props.meetup.title)
-  const date = eventDate.value.toFormat('yyyyMMdd')
+  const startDate = eventDate.value.toFormat('yyyyMMdd')
+  const endDate = eventDate.value.plus({ days: 1 }).toFormat('yyyyMMdd')
   const location = encodeURIComponent(props.meetup.venue || '')
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${date}/${date}&location=${location}`
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&location=${location}`
 })
 </script>
 
